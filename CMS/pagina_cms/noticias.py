@@ -17,9 +17,6 @@ def agregar_noticia(request):
             return render(request, 'panel.html', variables)
 
     if request.method == 'POST':
-        if 'nivel_usuario' not in request.session or request.session['nivel_usuario'] != 'ADMINISTRADOR':
-            raise PermissionDenied
-        
         ntitulo = request.POST.get('titulo')
         ncuerpo = request.POST.get('cuerpo')
         nimagen = request.FILES.get('imagen') 
