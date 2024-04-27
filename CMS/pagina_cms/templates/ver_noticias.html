@@ -18,7 +18,7 @@
                     {% if noticia.imagen %}
                     <img src="{{ noticia.imagen.url }}" class="card-img-top" alt="Imagen de la noticia">
                     {% endif %}
-                    {% if nivel_usuario == "ADMINISTRADOR" %}
+                    {% if nivel_usuario == "ADMINISTRADOR" or nivel_usuario == "MODERADOR" %}
                     <form action="{% url 'eliminar_noticia' noticia.id %}" method="post" style="display: inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger">Eliminar</button>

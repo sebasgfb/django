@@ -3,37 +3,36 @@
 {% block cuerpo %}
 <div class="untree_co-section pb-0">
     <div class="container">
-      <div class="row mb-4">
-        <div class="col-lg-7 text-center mx-auto">
-          <h2 class="section-heading gsap-reveal-hero mb-0"><strong>Panel de Control</strong></h2>
-          <div class="wave gsap-reveal-hero" >
-            <svg>
-              <path d="M10,10 L50,100 L90,50" stroke="#0389ff"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-7 form-group">
-          <label>{{m_error}}</label>
-        </div>
-        <div class="col-lg-7">
-          <p><strong>Bienvenido:</strong>{{nombre_usuario}}</p> 
+        <div class="row mb-4">
+            <div class="col-lg-7 text-center mx-auto">
+                <h2 class="section-heading gsap-reveal-hero mb-0"><strong>Panel de Control</strong></h2>
+                <div class="wave gsap-reveal-hero">
+                    <svg>
+                        <path d="M10,10 L50,100 L90,50" stroke="#0389ff"></path>
+                    </svg>
+                </div>
+            </div>
         </div>
         <div class="row">
-          <div class="col-lg-6 mb-4">
-              <a href="{% url 'verusuario' %}" class="btn btn-primary btn-block">Administrar Usuarios</a>
-          </div>
-          <div class="col-lg-6 mb-4">
-              <a href="{% url 'agregar_noticia' %}" class="btn btn-primary btn-block">Agregar Noticia</a>
-          </div>
-          <div class="col-lg-6 mb-4">
-              <a href="{% url 'ver_noticias' %}" class="btn btn-primary btn-block">Ver Noticias</a>
-          </div>
-          <div class="col-lg-6 mb-4">
-            <a href="{% url 'salir' %}" class="btn btn-danger btn-block">Salir del sistema</a>
-          </div>
-      </div>
+            <div class="col-lg-7 form-group">
+                <label>{{m_error}}</label>
+            </div>
+            <div class="col-lg-7">
+                <p><strong>Bienvenido:</strong> {{nombre_usuario}}</p>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <a href="{% url 'verusuario' %}" class="btn btn-primary btn-block">Administrar Usuarios</a>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <a href="{% url 'agregar_noticia' %}" class="btn btn-primary btn-block">Agregar Noticia</a>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <a href="{% url 'ver_noticias' %}" class="btn btn-primary btn-block">Ver Noticias</a>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <a href="{% url 'salir' %}" class="btn btn-danger btn-block">Salir del sistema</a>
+            </div>
+        </div>
     </div>
-  </div
+</div>
 {% endblock %}
