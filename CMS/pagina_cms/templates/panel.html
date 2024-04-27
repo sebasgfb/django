@@ -18,16 +18,21 @@
           <label>{{m_error}}</label>
         </div>
         <div class="col-lg-7">
-          <p><strong>Usuario:</strong>{{nombre_usuario}}</p> 
+          <p><strong>Bienvenido:</strong>{{nombre_usuario}}</p> 
         </div>
-        <div class="col-lg-7">
-          <ul>
-            <li><a href="{% url 'salir' %}" >Salir del sistema</a></li>
-            <li><a href="{% url 'verusuario'%}">Administrar Usuarios</a></li>
-            <li><a href="{% url 'agregar_noticia' %}">Agregar Noticia</a></li>
-            <li><a href="{% url 'ver_noticias' %}">Ver Noticias</a></li>
-          </ul>
-        </div>
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+              <a href="{% url 'verusuario' %}" class="btn btn-primary btn-block">Administrar Usuarios</a>
+          </div>
+          <div class="col-lg-6 mb-4">
+              <a href="{% url 'agregar_noticia' %}" class="btn btn-primary btn-block">Agregar Noticia</a>
+          </div>
+          <div class="col-lg-6 mb-4">
+              <a href="{% url 'ver_noticias' %}" class="btn btn-primary btn-block">Ver Noticias</a>
+          </div>
+          <div class="col-lg-6 mb-4">
+            <a href="{% url 'salir' %}" class="btn btn-danger btn-block">Salir del sistema</a>
+          </div>
       </div>
     </div>
   </div
