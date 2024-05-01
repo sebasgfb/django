@@ -6,6 +6,7 @@ urlpatterns = [
     path('agregar_noticia', noticias.agregar_noticia, name='agregar_noticia'),
     path('eliminar_noticia/<int:noticia_id>/', noticias.eliminar_noticia, name='eliminar_noticia'),
     path('ver_noticias', noticias.ver_noticias, name='ver_noticias'),
+    path('ver_noticia/<int:noticia_id>/', noticias.ver_noticia_completa, name='ver_noticia_completa'),
     path('verusuario', usuarios.ver, name='verusuario'),
     path('nueusuario', usuarios.nuevo, name='nueusuario'),
     path('modusuario/<id>', usuarios.modificar, name='modusuario'),
