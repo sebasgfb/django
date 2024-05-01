@@ -11,26 +11,24 @@
                         <path d="M10,10 L50,100 L90,50" stroke="#0389ff"></path>
                     </svg>
                 </div>
+                <p><strong>Bienvenido:</strong> {{nombre_usuario}}</p>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-7 form-group">
                 <label>{{m_error}}</label>
             </div>
-            <div class="col-lg-7">
-                <p><strong>Bienvenido:</strong> {{nombre_usuario}}</p>
+            <div class="col-lg-6 mb-4">
+                <a href="{% url 'verusuario' %}" class="btn btn-primary btn-block rounded-pill py-3 px-4 shadow-sm">Administrar Usuarios</a>
             </div>
             <div class="col-lg-6 mb-4">
-                <a href="{% url 'verusuario' %}" class="btn btn-primary btn-block">Administrar Usuarios</a>
+                <a href="{% url 'agregar_noticia' %}" class="btn btn-primary btn-block rounded-pill py-3 px-4 shadow-sm">Agregar Noticia</a>
             </div>
             <div class="col-lg-6 mb-4">
-                <a href="{% url 'agregar_noticia' %}" class="btn btn-primary btn-block">Agregar Noticia</a>
+                <a href="{% url 'ver_noticias' %}" class="btn btn-primary btn-block rounded-pill py-3 px-4 shadow-sm">Ver Noticias</a>
             </div>
             <div class="col-lg-6 mb-4">
-                <a href="{% url 'ver_noticias' %}" class="btn btn-primary btn-block">Ver Noticias</a>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <a href="{% url 'salir' %}" class="btn btn-danger btn-block">Salir del sistema</a>
+                <a href="{% url 'salir' %}" class="btn btn-danger btn-block rounded-pill py-3 px-4 shadow-sm">Salir del sistema</a>
             </div>
         </div>
     </div>
