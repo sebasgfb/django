@@ -2,10 +2,21 @@
 
 {% load static %}
 {% block cuerpo %}
+<style>
+    .card-text,
+    .card-title,
+    .text-muted {
+        color: #000 !important;
+    }
+    .card .card-title {
+        color: #000 !important;
+    }
+</style>
 <div class="container">
     <br>
     <br>
-    <h2 class="section-heading">Noticias</h2>
+    <a href="{% url 'acceder' %}" class="btn btn-primary btn-block rounded-pill shadow-sm mt-4">Volver</a>
+    <h2 class="section-heading mt-4">Noticias</h2>
     <div class="row">
         {% for noticia in noticias %}
         <div class="col-lg-6 mb-4">

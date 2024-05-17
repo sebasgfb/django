@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
 {% block cuerpo %}
+<style>
+    .card-text,
+    .card-title,
+    .text-muted {
+        color: #000 !important; /* Asegura que el color sea negro y anula otros estilos */
+    }
+    .card .card-title {
+        color: #000 !important; /* Más específico para asegurar la aplicación del color */
+    }
+</style>
 <div class="container">
     <br>
     <br>
-    <div class="card">
+    <a href="{% url 'ver_noticias' %}" class="btn btn-primary btn-block rounded-pill shadow-sm mt-4">Volver</a>
+    <div class="card mt-4">
         <div class="card-body">
             <h2 class="card-title">{{ noticia.titulo }}</h2>
             <p class="card-text"><small class="text-muted">Publicado el: {{ noticia.fecha }}</small></p>
@@ -20,7 +31,6 @@
             </form>
             {% endif %}
             <p class="card-text">{{ noticia.cuerpo }}</p>
-            
         </div>
     </div>
 </div>
