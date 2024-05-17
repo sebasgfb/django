@@ -16,7 +16,7 @@ class noticias(models.Model):
     titulo = models.CharField(max_length=200)
     fecha = models.DateTimeField(auto_now=True)
     cuerpo = models.CharField(max_length=3000)
-    imagen = models.ImageField(upload_to='pagina_cms/noticias_imagenes')
+    imagen = models.ImageField(upload_to='')
     grupo = models.ForeignKey(grupos, on_delete=models.RESTRICT)
     autor = models.ForeignKey(usuarios, on_delete=models.RESTRICT)
 
