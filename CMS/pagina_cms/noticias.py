@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import noticias, grupos, usuarios
+from .models import noticias, grupos, usuarios, comentarios
 from django.core.exceptions import PermissionDenied
 
 
@@ -46,4 +46,28 @@ def ver_noticias(request):
 def ver_noticia_completa(request, noticia_id):
     noticia = get_object_or_404(noticias, id=noticia_id)
     nivel_usuario = request.session.get('nivel_usuario')
-    return render(request, 'ver_noticia_completa.html', {'noticia': noticia, 'nivel_usuario': nivel_usuario})
+    if nivel_usuario in ["LECTOR"]:
+        comentarios_noticia = comentarios.objects.filter(noticia=noticia, visible=True).order_by('-fecha')
+    
+    if nivel_usuario in ["ADMINISTRADOR", "MODERADOR"]:
+        comentarios_noticia = comentarios.objects.filter(noticia=noticia).order_by('-fecha')
+
+    if request.method == 'POST':
+        if nivel_usuario in ["ADMINISTRADOR", "LECTOR", "MODERADOR"]:
+            cuerpo = request.POST.get('cuerpo')
+            autor = usuarios.objects.get(nombre=request.session.get('nombre_usuario', ''))
+            nuevo_comentario = comentarios(cuerpo=cuerpo, autor=autor, noticia=noticia, visible=False)
+            nuevo_comentario.save()
+        return redirect('ver_noticia_completa', noticia_id=noticia.id)
+    
+    return render(request, 'ver_noticia_completa.html', {'noticia': noticia, 'nivel_usuario': nivel_usuario, 'comentarios': comentarios_noticia})
+
+def eliminar_comentario(request, comentario_id):
+    comentario = get_object_or_404(comentarios, pk=comentario_id)
+    if request.method == 'POST':
+        if request.session.get('nivel_usuario') in ["ADMINISTRADOR", "MODERADOR"]:
+            comentario.delete()
+            messages.success(request, 'Comentario eliminado correctamente.')
+        else:
+            raise PermissionDenied
+    return redirect('ver_noticia_completa', noticia_id=comentario.noticia.id)

@@ -23,6 +23,6 @@ class noticias(models.Model):
 class comentarios(models.Model):
     cuerpo = models.CharField(max_length=200)
     fecha = models.DateTimeField(auto_now=True)
-    visible = models.CharField(max_length=2, default='NO')
+    visible = models.BooleanField(default=False)
     autor = models.ForeignKey(usuarios, on_delete=models.RESTRICT)
     noticia = models.ForeignKey(noticias, on_delete=models.RESTRICT)
