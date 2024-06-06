@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import noticias, grupos, usuarios, comentarios
 from django.core.exceptions import PermissionDenied
-
+from django.contrib.auth.decorators import login_required
 
 def agregar_noticia(request):
     if request.method == 'GET':
-        if 'nivel_usuario' in request.session and request.session['nivel_usuario'] == 'ADMINISTRADOR' or request.session['nivel_usuario'] == 'MODERADOR':
+        if 'nivel_usuario' in request.session and request.session['nivel_usuario'] in ['ADMINISTRADOR', 'MODERADOR']:
             vergrupos = grupos.objects.all()
             return render(request, 'agregar_noticia.html', {'grupos': vergrupos})
         else:
@@ -49,7 +49,6 @@ def ver_noticias(request):
     vergrupos = grupos.objects.all()
     return render(request, 'ver_noticias.html', {'noticias': vernoticias, 'grupos': vergrupos, 'grupo_seleccionado': grupo_id})
 
-
 def ver_noticia_completa(request, noticia_id):
     noticia = get_object_or_404(noticias, id=noticia_id)
     nivel_usuario = request.session.get('nivel_usuario')
@@ -83,7 +82,16 @@ def ver_noticia_completa(request, noticia_id):
         'comentarios_visibles': comentarios_visibles,
         'comentarios_no_visibles': comentarios_no_visibles
     })
+from django.shortcuts import get_object_or_404, redirect
 
+def aprobar_comentario(request, comentario_id):
+    comentario = get_object_or_404(comentarios, id=comentario_id)
+    
+    if request.session.get('nivel_usuario') in ["ADMINISTRADOR", "MODERADOR"]:
+        comentario.visible = True
+        comentario.save()
+    
+    return redirect('ver_noticia_completa', noticia_id=comentario.noticia.id)
 
 def eliminar_comentario(request, comentario_id):
     comentario = get_object_or_404(comentarios, pk=comentario_id)

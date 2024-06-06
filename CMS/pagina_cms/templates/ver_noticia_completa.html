@@ -128,6 +128,10 @@
                 <p class="comment-author">{{ comentario.autor.nombre }} - <small class="text-muted">{{comentario.fecha}}</small></p>
                 <p class="comment-body">{{ comentario.cuerpo }}</p>
                 {% if nivel_usuario == "ADMINISTRADOR" or nivel_usuario == "MODERADOR" %}
+                <form method="post" action="{% url 'aprobar_comentario' comentario.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button class="btn btn-success btn-sm" type="submit">Aprobar</button>
+                </form>
                 <form method="post" action="{% url 'eliminar_comentario' comentario.id %}" style="display: inline;">
                     {% csrf_token %}
                     <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>

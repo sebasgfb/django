@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import usuarios
 
 def inicio(request):
@@ -41,6 +42,7 @@ def acceder(request):
         else:
             variables['m_error'] = 'El usuario no está registrado'
             return render(request, 'acceder.html', variables)
+
 
 def salir(request):
     if 'codigo_usuario' in request.session:
