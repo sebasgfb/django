@@ -121,7 +121,7 @@
         {% endif %}
     
         {% if comentarios_no_visibles %}
-        <h4 class="mt-4">Comentarios por moderar:</h4>
+        <h3 class="card-title mt-4">Comentarios por moderar:</h3>
         {% for comentario in comentarios_no_visibles %}
         <div class="card comment-card mb-2">
             <div class="card-body">
@@ -142,7 +142,6 @@
         {% endfor %}
         {% endif %}
     
-        <h4 class="mt-4">Comentarios:</h4>
         {% for comentario in comentarios_visibles %}
         <div class="card comment-card mb-2">
             <div class="card-body">

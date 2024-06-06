@@ -19,5 +19,8 @@ urlpatterns = [
     path('acceder', inicio.acceder, name='acceder'),
     path('salir', inicio.salir, name='salir'),
     path('listanoticias', views.NoticiasAPILista.as_view(), name='listanoticias'),
-    path('listanoticias/<int:id>', views.NoticiasAPIDetalle.as_view(), name='detallenoticias')
+    path('listanoticias/<int:id>', views.NoticiasAPIDetalle.as_view(), name='detallenoticias'),
+    path('listagrupos', views.GruposAPILista.as_view(), name='listagrupos'),
+    path('nuevogrupo', views.GruposAPINuevo.as_view(), name='nuevogrupo'),
+    path('listausuarios', views.UsuariosAPILista.as_view(), name='listausuarios'),
 ]
