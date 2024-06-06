@@ -24,6 +24,20 @@
     <br>
     <br>
     <h2 class="section-heading mt-4">Noticias</h2>
+
+    <!-- Formulario de selección de grupo -->
+    <form method="GET" action="">
+        <div class="form-group">
+            <label for="grupo">Filtrar por grupo:</label>
+            <select id="grupo" name="grupo" class="form-control" onchange="this.form.submit()">
+                <option value="">Todos los grupos</option>
+                {% for grupo in grupos %}
+                <option value="{{ grupo.id }}" {% if grupo.id|stringformat:"s" == grupo_seleccionado %}selected{% endif %}>{{ grupo.grupo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+
     <div class="row">
         {% for noticia in noticias %}
         <div class="col-lg-6 mb-4">

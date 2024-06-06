@@ -40,27 +40,50 @@ def eliminar_noticia(request, noticia_id):
     return redirect('ver_noticias')
 
 def ver_noticias(request):
-    vernoticias = noticias.objects.all().order_by('-fecha')
-    return render(request, 'ver_noticias.html', {'noticias': vernoticias})
+    grupo_id = request.GET.get('grupo')
+    if grupo_id:
+        vernoticias = noticias.objects.filter(grupo_id=grupo_id).order_by('-fecha')
+    else:
+        vernoticias = noticias.objects.all().order_by('-fecha')
+    
+    vergrupos = grupos.objects.all()
+    return render(request, 'ver_noticias.html', {'noticias': vernoticias, 'grupos': vergrupos, 'grupo_seleccionado': grupo_id})
+
 
 def ver_noticia_completa(request, noticia_id):
     noticia = get_object_or_404(noticias, id=noticia_id)
     nivel_usuario = request.session.get('nivel_usuario')
-    if nivel_usuario in ["LECTOR"]:
-        comentarios_noticia = comentarios.objects.filter(noticia=noticia, visible=True).order_by('-fecha')
-    
-    if nivel_usuario in ["ADMINISTRADOR", "MODERADOR"]:
-        comentarios_noticia = comentarios.objects.filter(noticia=noticia).order_by('-fecha')
+
+    if nivel_usuario == "LECTOR":
+        comentarios_visibles = comentarios.objects.filter(noticia=noticia, visible=True).order_by('-fecha')
+        comentarios_no_visibles = []
+    elif nivel_usuario in ["ADMINISTRADOR", "MODERADOR"]:
+        comentarios_visibles = comentarios.objects.filter(noticia=noticia, visible=True).order_by('-fecha')
+        comentarios_no_visibles = comentarios.objects.filter(noticia=noticia, visible=False).order_by('-fecha')
+    else:
+        comentarios_visibles = []
+        comentarios_no_visibles = []
 
     if request.method == 'POST':
         if nivel_usuario in ["ADMINISTRADOR", "LECTOR", "MODERADOR"]:
             cuerpo = request.POST.get('cuerpo')
             autor = usuarios.objects.get(nombre=request.session.get('nombre_usuario', ''))
-            nuevo_comentario = comentarios(cuerpo=cuerpo, autor=autor, noticia=noticia, visible=False)
+            
+            if nivel_usuario == "LECTOR":
+                nuevo_comentario = comentarios(cuerpo=cuerpo, autor=autor, noticia=noticia, visible=False)
+            else:  # ADMINISTRADOR or MODERADOR
+                nuevo_comentario = comentarios(cuerpo=cuerpo, autor=autor, noticia=noticia, visible=True)
+                
             nuevo_comentario.save()
-        return redirect('ver_noticia_completa', noticia_id=noticia.id)
-    
-    return render(request, 'ver_noticia_completa.html', {'noticia': noticia, 'nivel_usuario': nivel_usuario, 'comentarios': comentarios_noticia})
+            return redirect('ver_noticia_completa', noticia_id=noticia.id)
+
+    return render(request, 'ver_noticia_completa.html', {
+        'noticia': noticia,
+        'nivel_usuario': nivel_usuario,
+        'comentarios_visibles': comentarios_visibles,
+        'comentarios_no_visibles': comentarios_no_visibles
+    })
+
 
 def eliminar_comentario(request, comentario_id):
     comentario = get_object_or_404(comentarios, pk=comentario_id)
