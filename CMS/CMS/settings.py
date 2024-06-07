@@ -127,7 +127,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = r'C:\Users\PC\Desktop\Tecnologia\django\django\CMS\pagina_cms\noticias_imagenes'
+MEDIA_ROOT = r'C:\Users\Admin\Desktop\Proyecto\django\CMS\pagina_cms\noticias_imagenes'
 
 
 # Default primary key field type

@@ -9,11 +9,13 @@ class ComentariosAPILista(generics.ListAPIView):
     serializer_class = SerialComentarios
 
     def get_queryset(self):
-        queryset = comentarios.objects.all()
         noticia_id = self.request.query_params.get('noticia', None)
         if noticia_id is not None:
-            queryset = queryset.filter(noticia_id=noticia_id)
+            queryset = comentarios.objects.filter(noticia_id=noticia_id).select_related('noticia')  # Ejemplo con select_related
+        else:
+            queryset = comentarios.objects.all().select_related('noticia')
         return queryset
+
 
 class UsuariosAPILista(generics.ListAPIView):
     queryset=usuarios.objects.all()
