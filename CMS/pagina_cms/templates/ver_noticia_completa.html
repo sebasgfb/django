@@ -111,13 +111,13 @@
         <form class="mb-5" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="cuerpo">Añadir un comentario:</label>
+                <label for="cuerpo">Añade un comentario (Estos quedarán pendientes a ser moderados y se mostrarán al ser aprobados):</label>
                 <textarea class="form-control" id="cuerpo" name="cuerpo" rows="3" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="submit" class="btn rounded-pill btn-primary">Enviar</button>
         </form>
         {% else %}
-        <p>Debes <a href="{% url 'acceder' %}">iniciar sesión</a> para comentar.</p>
+        <p>Debes <a href="{% url 'acceder' %}">iniciar sesión</a> para comentar y ver comentarios.</p>
         {% endif %}
     
         {% if comentarios_no_visibles %}
@@ -130,11 +130,11 @@
                 {% if nivel_usuario == "ADMINISTRADOR" or nivel_usuario == "MODERADOR" %}
                 <form method="post" action="{% url 'aprobar_comentario' comentario.id %}" style="display: inline;">
                     {% csrf_token %}
-                    <button class="btn btn-success btn-sm" type="submit">Aprobar</button>
+                    <button class="btn btn-success rounded-pill btn-sm" type="submit">Aprobar</button>
                 </form>
                 <form method="post" action="{% url 'eliminar_comentario' comentario.id %}" style="display: inline;">
                     {% csrf_token %}
-                    <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                    <button class="btn btn-danger rounded-pill btn-sm" type="submit">Eliminar</button>
                 </form>
                 {% endif %}
             </div>
@@ -150,7 +150,7 @@
                 {% if nivel_usuario == "ADMINISTRADOR" or nivel_usuario == "MODERADOR" %}
                 <form method="post" action="{% url 'eliminar_comentario' comentario.id %}" style="display: inline;">
                     {% csrf_token %}
-                    <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                    <button class="btn btn-danger rounded-pill btn-sm" type="submit">Eliminar</button>
                 </form>
                 {% endif %}
             </div>

@@ -1,6 +1,24 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import usuarios
 
+def registrar_lector(request):
+    if request.method == 'POST':
+        f_nombre = request.POST.get('nombre')
+        f_usuario = request.POST.get('usuario')
+        f_clave = request.POST.get('clave')
+        
+        nuevousuario = usuarios(
+            nombre=f_nombre,
+            usuario=f_usuario,
+            clave=f_clave,
+            estado='ACTIVO',  
+            nivel='LECTOR'    
+        )        
+        nuevousuario.save()
+        return redirect('acceder') 
+
+    return render(request, 'lector_nuevo.html')
+
 def ver(request):
     if request.method=='GET':
         if 'nivel_usuario' in request.session:

@@ -16,7 +16,6 @@ class ComentariosAPILista(generics.ListAPIView):
             queryset = comentarios.objects.all().select_related('noticia')
         return queryset
 
-
 class UsuariosAPILista(generics.ListAPIView):
     queryset=usuarios.objects.all()
     serializer_class=SerialUsuarios
@@ -35,11 +34,6 @@ class GruposAPILista(generics.ListAPIView):
     serializer_class=SerialGrupos
 
 class GruposAPINuevo(generics.CreateAPIView):
-    queryset=grupos.objects.all()
-    serializer_class=SerialGrupos
-
-class GruposAPIModificar(generics.RetrieveUpdateAPIView):
-    lookup_field='id'
     queryset=grupos.objects.all()
     serializer_class=SerialGrupos
 

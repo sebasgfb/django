@@ -16,35 +16,31 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
-                <form action="{% url 'agregar_noticia' %}" method="post" enctype="multipart/form-data">
+            <div class="col-lg-8 mx-auto">
+                <form action="{% url 'agregar_noticia' %}" method="post" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
                     {% csrf_token %}
-                    <div class="row">
-                        <div class="col-lg-12 form-group">
-                            <label>Título de la Noticia:</label>
-                            <input type="text" name="titulo" class="form-control" required>
-                        </div>
-                        <div class="col-lg-12 form-group">
-                            <label>Cuerpo de la Noticia:</label>
-                            <textarea name="cuerpo" class="form-control" rows="5" required></textarea>
-                        </div>
-                        <div class="col-lg-12 form-group">
-                            <label>Imagen de la Noticia:</label>
-                            <input type="file" name="imagen" class="form-control" required>
-                        </div>
-                        <div class="col-lg-12 form-group">
-                            <label>Grupo:</label>
-                            <select name="grupo" class="form-control" required>
-                                {% for grupo in grupos.all %}
-                                <option value="{{ grupo.id }}">{{ grupo.grupo }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                    <div class="form-group mb-3">
+                        <label for="titulo">Título de la Noticia:</label>
+                        <input type="text" name="titulo" id="titulo" class="form-control" required>
                     </div>
-                    <div class="row">
-                        <div class="col-12 form-group">
-                            <input type="submit" class="btn btn-black" value="Publicar Noticia">
-                        </div>
+                    <div class="form-group mb-3">
+                        <label for="cuerpo">Cuerpo de la Noticia:</label>
+                        <textarea name="cuerpo" id="cuerpo" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="imagen">Imagen de la Noticia:</label>
+                        <input type="file" name="imagen" id="imagen" class="form-control-file" required>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="grupo">Grupo:</label>
+                        <select name="grupo" id="grupo" class="form-control" required>
+                            {% for grupo in grupos.all %}
+                            <option value="{{ grupo.id }}">{{ grupo.grupo }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" class="btn btn-primary rounded-pill shadow-sm" value="Publicar Noticia">
                     </div>
                 </form>  
             </div>

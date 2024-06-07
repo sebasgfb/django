@@ -17,7 +17,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12 mb-4">
-                <a href="{% url 'nueusuario' %}" class="btn btn-info">Nuevo Usuario</a>
+                <a href="{% url 'nueusuario' %}" class="btn btn-info rounded-pill shadow-sm">Nuevo Usuario</a>
             </div>
             <div class="col-lg-12">
                 <div class="table-responsive" style="background-color: #fff;">
@@ -39,8 +39,8 @@
                                 <td>{{ valor.estado }}</td>
                                 <td>{{ valor.nivel }}</td>
                                 <td>
-                                    <a href="{% url 'modusuario' id=valor.id %}" class="btn btn-warning btn-sm">Modificar</a>
-                                    <a href="{% url 'borusuario' id=valor.id %}" class="btn btn-danger btn-sm">Borrar</a>
+                                    <a href="{% url 'modusuario' id=valor.id %}" class="btn btn-warning btn-sm rounded-pill shadow-sm">Modificar</a>
+                                    <a href="{% url 'borusuario' id=valor.id %}" class="btn btn-danger btn-sm rounded-pill shadow-sm">Borrar</a>
                                 </td>
                             </tr>
                             {% endfor %}

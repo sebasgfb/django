@@ -15,44 +15,39 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
-                <form action="{% url 'nueusuario' %}" method="post">
+            <div class="col-lg-8 mx-auto">
+                <a href="{% url 'verusuario' %}" class="btn btn-primary btn-block rounded-pill shadow-sm mt-4">Volver</a>
+                <form action="{% url 'nueusuario' %}" method="post" class="p-4 m-5 border rounded shadow-sm">
                     {% csrf_token %}
-                    <div class="row">
-                        <div class="col-lg-12 form-group">
-                            <label>Nombre del Usuario:</label>
-                            <input type="text" name="nombre" class="form-control">
-                        </div>
-                        <div class="col-lg-6 form-group">
-                            <label>Usuario:</label>
-                            <input type="text" name="usuario" class="form-control">
-                        </div>
-                        <div class="col-lg-6 form-group">
-                            <label>Contraseña:</label>
-                            <input type="password" name="clave" class="form-control">
-                        </div>
+                    <div class="form-group mb-3">
+                        <label for="nombre">Nombre del Usuario:</label>
+                        <input type="text" name="nombre" id="nombre" class="form-control" required>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6 form-group">
-                            <label>Estado:</label>
-                            <select name="estado" class="form-select">
-                                <option value="ACTIVO">Activo</option>
-                                <option value="INACTIVO">Inactivo</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-6 form-group">
-                            <label>Nivel:</label>
-                            <select name="nivel" class="form-select">
-                                <option value="ADMINISTRADOR">Administrador</option>
-                                <option value="MODERADOR">Moderador</option>
-                                <option value="LECTOR">Lector</option>
-                            </select>
-                        </div>
+                    <div class="form-group mb-3">
+                        <label for="usuario">Usuario:</label>
+                        <input type="text" name="usuario" id="usuario" class="form-control" required>
                     </div>
-                    <div class="row">
-                        <div class="col-12 form-group">
-                            <input type="submit" class="btn btn-black" value="Guardar Cambios">
-                        </div>
+                    <div class="form-group mb-3">
+                        <label for="clave">Contraseña:</label>
+                        <input type="password" name="clave" id="clave" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="estado">Estado:</label>
+                        <select name="estado" id="estado" class="form-select rounded-pill shadow-sm" required>
+                            <option value="ACTIVO">Activo</option>
+                            <option value="INACTIVO">Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="nivel">Nivel:</label>
+                        <select name="nivel" id="nivel" class="form-select rounded-pill shadow-sm" required>
+                            <option value="ADMINISTRADOR">Administrador</option>
+                            <option value="MODERADOR">Moderador</option>
+                            <option value="LECTOR">Lector</option>
+                        </select>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" class="btn btn-primary rounded-pill shadow-sm" value="Guardar Cambios">
                     </div>
                 </form>
             </div>
