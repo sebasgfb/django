@@ -19,8 +19,8 @@ class SerialNoticias(serializers.ModelSerializer):
         fields= [
             'id',
             'titulo',
+            'grupo',
             'fecha',
-            'cuerpo',
             'imagen',
         ]
 
@@ -33,6 +33,7 @@ class SerialDetallesNoticias(serializers.ModelSerializer):
             'fecha',
             'imagen',
             'cuerpo',
+            'grupo',
             'autor',
         ]
 
