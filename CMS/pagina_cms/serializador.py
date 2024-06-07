@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import grupos, noticias, usuarios
+from .models import comentarios, grupos, noticias, usuarios
 
 class SerialUsuarios(serializers.ModelSerializer):
     class Meta:
@@ -22,6 +22,18 @@ class SerialNoticias(serializers.ModelSerializer):
             'grupo',
             'fecha',
             'imagen',
+        ]
+
+class SerialComentarios(serializers.ModelSerializer):
+    class Meta:
+        model=comentarios
+        fields= [
+            'id',
+            'cuerpo',
+            'fecha',
+            'visible',
+            'autor',
+            'noticia',
         ]
 
 class SerialDetallesNoticias(serializers.ModelSerializer):

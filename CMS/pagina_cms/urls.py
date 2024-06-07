@@ -23,4 +23,5 @@ urlpatterns = [
     path('listagrupos', views.GruposAPILista.as_view(), name='listagrupos'),
     path('nuevogrupo', views.GruposAPINuevo.as_view(), name='nuevogrupo'),
     path('listausuarios', views.UsuariosAPILista.as_view(), name='listausuarios'),
+    path('listacomentarios', views.ComentariosAPILista.as_view(), name='listacomentarios'),
 ]

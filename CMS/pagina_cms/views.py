@@ -1,9 +1,19 @@
 from django.shortcuts import get_object_or_404, render
 from rest_framework import generics, status
-from .serializador import SerialGrupos, SerialNoticias, SerialDetallesNoticias, SerialUsuarios
-from .models import grupos, noticias, usuarios
+from .serializador import SerialComentarios, SerialGrupos, SerialNoticias, SerialDetallesNoticias, SerialUsuarios
+from .models import comentarios, grupos, noticias, usuarios
 from django.contrib.auth.hashers import check_password
 from rest_framework.response import Response 
+
+class ComentariosAPILista(generics.ListAPIView):
+    serializer_class = SerialComentarios
+
+    def get_queryset(self):
+        queryset = comentarios.objects.all()
+        noticia_id = self.request.query_params.get('noticia', None)
+        if noticia_id is not None:
+            queryset = queryset.filter(noticia_id=noticia_id)
+        return queryset
 
 class UsuariosAPILista(generics.ListAPIView):
     queryset=usuarios.objects.all()
